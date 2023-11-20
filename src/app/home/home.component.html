@@ -1,0 +1,11 @@
+<form>
+    <div class="mb-3">
+      <label for="latitudine" class="form-label">Latitudine</label>
+      <input type="text" name="latitudine" class="form-control" [(ngModel)]="jsonIn.lat">
+    </div>
+    <div class="mb-3">
+      <label for="longitudine" class="form-label">Longitudine</label>
+      <input type="text" name="longitudine" class="form-control" [(ngModel)]="jsonIn.long">
+    </div>
+    <button type="submit" class="btn btn-primary" routerLink="/detail/:lat/:long" (click)="passLatLong(jsonIn.lat, jsonIn.long)">Submit</button>
+</form>

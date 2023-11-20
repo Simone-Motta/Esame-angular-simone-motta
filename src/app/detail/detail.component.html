@@ -1,0 +1,10 @@
+<div class="container" *ngIf="sunsetDetails">
+    <div class="row">
+        <div class="col">Sunset: {{ sunsetDetails.sunset }}</div>
+        <div class="col">Dawn: {{ sunsetDetails.dawn }}</div>
+    </div>
+    <div class="row" *ngFor="let detail of weatherForecastDetails">
+        <div class="col">{{ detail.timepoint }}</div>
+        <div class="col">{{ detail.temp2m }}</div>
+    </div>
+</div>
