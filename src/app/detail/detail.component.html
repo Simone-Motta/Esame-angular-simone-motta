@@ -1,10 +1,12 @@
-<div class="container" *ngIf="sunsetDetails">
+<div class="container mt-3" *ngIf="sunsetDetails">
+    <h2 class="text-color">Ecco i dati meteo per la località con:</h2>
+    <h3 class="text-color">Lat: {{ latitudine }}  Long: {{ longitudine }}</h3>
     <div class="row">
-        <div class="col">Sunset: {{ sunsetDetails.sunset }}</div>
-        <div class="col">Dawn: {{ sunsetDetails.dawn }}</div>
+        <div class="col text-color">Sunset: {{ sunsetDetails.sunset }}</div>
+        <div class="col text-color">Dawn: {{ sunsetDetails.dawn }}</div>
     </div>
     <div class="row" *ngFor="let detail of weatherForecastDetails">
-        <div class="col">{{ detail.timepoint }}</div>
-        <div class="col">{{ detail.temp2m }}</div>
+        <div class="col text-color">{{ detail.timepoint }}</div>
+        <div class="col text-color">{{ detail.temp2m }}</div>
     </div>
 </div>

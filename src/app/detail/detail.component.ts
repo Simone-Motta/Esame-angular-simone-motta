@@ -14,18 +14,32 @@ export class DetailComponent implements OnInit {
     sunsetDetails!: SunsetResults;
     weatherForecastDetails: WeatherForecastResult[] = [];
 
+    latitudine: number = 0;
+    longitudine: number = 0;
+
     constructor (private meteoService: MeteoService, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
 
+        // this.route.paramMap.subscribe(params => {
+
+        //     const latitudine = parseFloat(params.get("lat")!)
+        //     const longitudine = parseFloat(params.get("long")!)
+        //     console.log(latitudine, longitudine)
+
+        //     this.printDetailSunset(latitudine, longitudine)
+        //     this.printDetailWeatherForecast(latitudine, longitudine)
+  
+        // })
+
         this.route.paramMap.subscribe(params => {
 
-            const latitudine = parseFloat(params.get("lat")!)
-            const longitudine = parseFloat(params.get("long")!)
-            console.log(latitudine, longitudine)
+            this.latitudine = parseFloat(params.get("lat")!)
+            this.longitudine = parseFloat(params.get("long")!)
+            console.log(this.latitudine, this.longitudine)
 
-            this.printDetailSunset(latitudine, longitudine)
-            this.printDetailWeatherForecast(latitudine, longitudine)
+            this.printDetailSunset(this.latitudine, this.longitudine)
+            this.printDetailWeatherForecast(this.latitudine, this.longitudine)
   
         })
 

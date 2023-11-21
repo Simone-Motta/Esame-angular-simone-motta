@@ -1,11 +1,59 @@
-<form>
-    <div class="mb-3">
-      <label for="latitudine" class="form-label">Latitudine</label>
-      <input type="text" name="latitudine" class="form-control" [(ngModel)]="jsonIn.lat">
+<section>
+  <div class="container-explanation d-flex align-items-center justify-content-center">
+    <div class="row text-center">
+      <div class="explanation">    
+        <h1>Sunset.io</h1>  
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus impedit unde nisi eius iure numquam vero adipisci, explicabo rem distinctio nobis doloribus fugit, facilis quas molestiae eligendi nostrum? Sequi, necessitatibus.</p>
+        <a href="#provaApi"><button class="btn btn-warning rounded-pill" >Provami subito!</button></a>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="longitudine" class="form-label">Longitudine</label>
-      <input type="text" name="longitudine" class="form-control" [(ngModel)]="jsonIn.long">
+  </div>
+</section>
+
+<section class="border-top border-bottom border-3 border-light">
+  <div class="container-fluid mt-5">
+    <div class="d-flex justify-content-center">
+      <form>
+          <div class="row mb-3">
+            <div class="col text-center">
+              <label for="latitudine" class="col-form-label text-color">Latitudine</label>
+              <input type="text" name="latitudine" class="form-control input-w mx-auto" [(ngModel)]="jsonIn.lat">
+            </div>
+            <div class="col text-center">
+              <label for="longitudine" class="col-form-label text-color">Longitudine</label>
+              <input type="text" name="longitudine" class="form-control input-w mx-auto" [(ngModel)]="jsonIn.long">
+            </div>  
+          </div>
+      </form>
     </div>
-    <button type="submit" class="btn btn-primary" routerLink="/detail/:lat/:long" (click)="passLatLong(jsonIn.lat, jsonIn.long)">Submit</button>
-</form>
+    <div class="d-flex justify-content-center mb-5">
+      <button type="submit" class="btn btn-warning rounded-pill" routerLink="/detail/:lat/:long" (click)="passLatLong(jsonIn.lat, jsonIn.long)">Submit</button>
+    </div>
+  </div>
+</section>
+
+<section id="provaApi">
+  <div class="container-fluid mt-4">
+    <div class="d-flex justify-content-center">
+      <p>Scegli una città di cui vuoi sapere le informazioni meteo e/o l'ora dell'alba e tramonto</p>
+    </div>
+    <div class="row row-cols-sm-1 row-cols-md-2 row-cols-xl-4">
+      <div class="col text-center mt-3" (click)="passLatLong(predifinedLocality.newYork.lat, predifinedLocality.newYork.long)">
+        <h3>New York</h3>
+        <img src="https://i.natgeofe.com/k/5b396b5e-59e7-43a6-9448-708125549aa1/new-york-statue-of-liberty.jpg" alt="" width="300px" height="200px" class="">
+      </div>
+      <div class="col text-center mt-3" (click)="passLatLong(predifinedLocality.rome.lat, predifinedLocality.rome.long)">
+        <h3>Rome</h3>
+        <img src="https://media.istockphoto.com/id/539115110/it/foto/colosseo-di-roma-e-sole-mattutino-italia.jpg?s=612x612&w=0&k=20&c=ngbBMGVEkJxHsnt4SN7ZuncEnRenq2tFI8V0-zCg4pw=" alt="" width="300px" height="200px" class="">
+      </div>
+      <div class="col text-center mt-3" (click)="passLatLong(predifinedLocality.tokyo.lat, predifinedLocality.tokyo.long)">
+        <h3>Tokyo</h3>
+        <img src="https://media.istockphoto.com/id/1390815938/it/foto/tokyo-citt%C3%A0-in-giappone.jpg?s=612x612&w=0&k=20&c=bkHeUN2WsDu3ijBdp_XCR9nUfefCRUIvIb0ZdF_M4Mc=" alt="" width="300px" height="200px" class="">
+      </div>
+      <div class="col text-center mt-3" (click)="passLatLong(predifinedLocality.london.lat, predifinedLocality.london.long)">
+        <h3>London</h3>
+        <img src="https://www.dltviaggi.it/immagine/17827/Londra%201.jpg" alt="" width="300px" height="200px" class="">
+      </div>
+    </div>
+  </div>
+</section>
