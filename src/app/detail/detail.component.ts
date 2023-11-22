@@ -21,17 +21,6 @@ export class DetailComponent implements OnInit {
 
     ngOnInit(): void {
 
-        // this.route.paramMap.subscribe(params => {
-
-        //     const latitudine = parseFloat(params.get("lat")!)
-        //     const longitudine = parseFloat(params.get("long")!)
-        //     console.log(latitudine, longitudine)
-
-        //     this.printDetailSunset(latitudine, longitudine)
-        //     this.printDetailWeatherForecast(latitudine, longitudine)
-  
-        // })
-
         this.route.paramMap.subscribe(params => {
 
             this.latitudine = parseFloat(params.get("lat")!)

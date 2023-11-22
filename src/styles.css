@@ -2,6 +2,7 @@
 
 :root {
     --clr-primary: #1a3658;
+    --clr-secondary: #041c3a;
     --clr-text: white;
     --clr-textSecondary: rgb(236 216 172);
 }
@@ -22,8 +23,12 @@ p {
     color: var(--clr-text);
 }
 
+.text-color-y {
+    color: var(--clr-textSecondary);
+}
+
 .navbar {
-    background-color: var(--clr-primary);
+    background-color: var(--clr-secondary);
 }
 
 .container-explanation {
@@ -44,4 +49,8 @@ p {
 
 .input-w {
     width: 400px;
+}
+
+.container-bg {
+    background-color: var(--clr-secondary);
 }

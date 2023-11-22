@@ -1,12 +1,41 @@
-<div class="container mt-3" *ngIf="sunsetDetails">
-    <h2 class="text-color">Ecco i dati meteo per la località con:</h2>
-    <h3 class="text-color">Lat: {{ latitudine }}  Long: {{ longitudine }}</h3>
-    <div class="row">
-        <div class="col text-color">Sunset: {{ sunsetDetails.sunset }}</div>
-        <div class="col text-color">Dawn: {{ sunsetDetails.dawn }}</div>
+<div class="container-fluid m-3">
+    <h2 class="">Ecco i dati meteo per la località con:</h2>
+    <h3 class="text-color-y">Lat: {{ latitudine }}</h3> 
+    <h3 class="text-color-y">Long: {{ longitudine }}</h3>
+</div>
+
+<section>
+    <div class="container container-bg rounded-4" *ngIf="sunsetDetails">
+        <div class="row row-cols-1 row-cols-sm-2 py-5">
+            <div class="col d-flex justify-content-center">
+                <figure class="text-center">
+                    <h3>Sunrise</h3>
+                    <img src="https://sunrisesunset.io/wp-content/uploads/2022/03/sunrise-5.svg" alt="" height="100px" width="100px" class="img-fluid">
+                    <figcaption class="text-color">Sunset: {{ sunsetDetails.sunrise }}</figcaption>
+                    <p>Dawn: {{ sunsetDetails.dawn }}</p>
+                </figure>                
+            </div>
+            <div class="col d-flex justify-content-center">
+                <figure class="text-center">
+                    <h3>Sunset</h3>
+                    <img src="https://sunrisesunset.io/wp-content/uploads/2022/03/sunset-5.svg" alt="" height="100px" width="100px" class="img-fluid">
+                    <figcaption class="text-color">Dawn: {{ sunsetDetails.sunset }}</figcaption>
+                    <p>Dusk: {{ sunsetDetails.dusk }}</p>
+                </figure>        
+            </div>
+        </div>
     </div>
-    <div class="row" *ngFor="let detail of weatherForecastDetails">
-        <div class="col text-color">{{ detail.timepoint }}</div>
-        <div class="col text-color">{{ detail.temp2m }}</div>
+</section>
+
+<div class="container container-bg rounded-4 py-5 mt-3">
+    <div class="row py-1 border border-light rounded-top-3 mx-5">
+        <div class="col text-color-y text-center fw-bold">Timestamp</div>
+        <div class="col text-color-y text-center fw-bold">Temp2m</div>
+        <div class="col text-color-y text-center fw-bold">Icona</div>
+    </div>
+    <div class="row py-3 border border-light mx-5" *ngFor="let detail of weatherForecastDetails">
+        <div class="col text-color text-center">{{ detail.timepoint }}</div>
+        <div class="col text-color text-center">{{ detail.temp2m }}</div>
+        <div class="col text-color text-center">ICONA</div>
     </div>
 </div>
