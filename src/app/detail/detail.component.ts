@@ -17,6 +17,8 @@ export class DetailComponent implements OnInit {
     latitudine: number = 0;
     longitudine: number = 0;
 
+    flagConvertFormat: boolean = true;
+
     constructor (private meteoService: MeteoService, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
@@ -47,5 +49,31 @@ export class DetailComponent implements OnInit {
             console.log(this.weatherForecastDetails)
         })
     }
+
+    convertTo24HourFormat(time12h: string) {
+        //Dividi l'orario e il periodo (AM/PM)
+        const [time, period] = time12h.split(' '); 
+        //Dividi le ore, i minuti e i secondi
+        const [hours, minutes, seconds] = time.split(':').map(Number); 
+        
+        //Inizializza le ore nel formato a 24 ore
+        let hours24 = hours; 
+      
+        if (period === 'PM' && hours24 !== 12) {
+            //Se è PM e non è 12 PM, aggiungi 12 ore
+            hours24 += 12; 
+        } else if (period === 'AM' && hours24 === 12) {
+            //Se è 12 AM (mezzanotte), le ore diventano 0
+            hours24 = 0; 
+        }
+      
+        // Formatta le ore, i minuti e i secondi in formato a 24 ore
+        const formattedHours = hours24.toString().padStart(2, '0');
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+        const formattedSeconds = seconds.toString().padStart(2, '0');
+      
+        //return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`; // Restituisce l'orario nel formato a 24 ore
+        return "" + formattedHours + ":" + formattedMinutes + ":" + formattedSeconds
+      }
 
 }

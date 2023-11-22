@@ -54,3 +54,7 @@ p {
 .container-bg {
     background-color: var(--clr-secondary);
 }
+
+i {
+    height: 100px;
+}

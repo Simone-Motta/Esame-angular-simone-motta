@@ -1,41 +1,79 @@
-<div class="container-fluid m-3">
-    <h2 class="">Ecco i dati meteo per la località con:</h2>
-    <h3 class="text-color-y">Lat: {{ latitudine }}</h3> 
-    <h3 class="text-color-y">Long: {{ longitudine }}</h3>
+<div class="container-fluid mt-4" *ngIf="sunsetDetails">
+    <div class="d-md-flex">
+        <h2 class="m-0">Ecco i dati meteo per la località:</h2>      
+        <h2 class="m-0 ms-md-3 text-warning">{{ sunsetDetails.timezone }}</h2>      
+    </div>
+    <h3 class="text-color-y m-0">Lat: {{ latitudine }}</h3> 
+    <h3 class="text-color-y m-0">Long: {{ longitudine }}</h3>
 </div>
 
 <section>
-    <div class="container container-bg rounded-4" *ngIf="sunsetDetails">
-        <div class="row row-cols-1 row-cols-sm-2 py-5">
+    <div class="container container-bg rounded-4 mt-5" *ngIf="sunsetDetails">
+        
+        <h3 class="text-center pt-3 text-warning fw-bold">Today</h3>
+
+        <div class="row row-cols-1 row-cols-sm-2 py-3">
             <div class="col d-flex justify-content-center">
                 <figure class="text-center">
                     <h3>Sunrise</h3>
                     <img src="https://sunrisesunset.io/wp-content/uploads/2022/03/sunrise-5.svg" alt="" height="100px" width="100px" class="img-fluid">
-                    <figcaption class="text-color">Sunset: {{ sunsetDetails.sunrise }}</figcaption>
-                    <p>Dawn: {{ sunsetDetails.dawn }}</p>
+                    <figcaption class="text-color" *ngIf="flagConvertFormat">Sunset: {{ sunsetDetails.sunrise }}</figcaption>
+                    <figcaption class="text-color" *ngIf="flagConvertFormat === false">Sunset: {{ convertTo24HourFormat(sunsetDetails.sunrise) }}</figcaption>
+                    <p *ngIf="flagConvertFormat">Dawn: {{ sunsetDetails.dawn }}</p>
+                    <p *ngIf="flagConvertFormat === false">Dawn: {{ convertTo24HourFormat(sunsetDetails.dawn) }}</p>
                 </figure>                
             </div>
             <div class="col d-flex justify-content-center">
                 <figure class="text-center">
                     <h3>Sunset</h3>
                     <img src="https://sunrisesunset.io/wp-content/uploads/2022/03/sunset-5.svg" alt="" height="100px" width="100px" class="img-fluid">
-                    <figcaption class="text-color">Dawn: {{ sunsetDetails.sunset }}</figcaption>
-                    <p>Dusk: {{ sunsetDetails.dusk }}</p>
+                    <figcaption class="text-color" *ngIf="flagConvertFormat">Dawn: {{ sunsetDetails.sunset }}</figcaption>
+                    <figcaption class="text-color" *ngIf="flagConvertFormat === false">Dawn: {{ convertTo24HourFormat(sunsetDetails.sunset) }}</figcaption>
+                    <p *ngIf="flagConvertFormat">Dusk: {{ sunsetDetails.dusk }}</p>
+                    <p *ngIf="flagConvertFormat === false">Dusk: {{ convertTo24HourFormat(sunsetDetails.dusk) }}</p>
                 </figure>        
             </div>
         </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-warning rounded-pill mb-3" (click)="flagConvertFormat = !flagConvertFormat">
+                <ng-container *ngIf="flagConvertFormat">
+                    Convert format: 24h 
+                </ng-container>
+                <ng-container *ngIf="!flagConvertFormat">
+                    Convert format: 12h
+                </ng-container>
+            </button>
+        </div>
+
     </div>
 </section>
 
-<div class="container container-bg rounded-4 py-5 mt-3">
+<div class="container container-bg rounded-4 py-5 my-3">
+
     <div class="row py-1 border border-light rounded-top-3 mx-5">
         <div class="col text-color-y text-center fw-bold">Timestamp</div>
-        <div class="col text-color-y text-center fw-bold">Temp2m</div>
+        <div class="col text-color-y text-center fw-bold">Temperatura</div>
         <div class="col text-color-y text-center fw-bold">Icona</div>
     </div>
     <div class="row py-3 border border-light mx-5" *ngFor="let detail of weatherForecastDetails">
-        <div class="col text-color text-center">{{ detail.timepoint }}</div>
-        <div class="col text-color text-center">{{ detail.temp2m }}</div>
-        <div class="col text-color text-center">ICONA</div>
+        <div class="col text-color text-center my-auto">{{ detail.timepoint }}</div>
+        <div class="col text-color text-center my-auto">{{ detail.temp2m }}</div>
+        <div class="col text-color text-center" *ngIf="detail.cloudcover >= 1 && detail.cloudcover <= 3">
+            <i class="bi bi-brightness-high fs-1 text-warning"></i>
+            <span *ngIf="detail.prec_type === 'rain'"><i class="bi bi-cloud-drizzle mx-3 fs-1 text-secondary"></i></span>
+            <span *ngIf="detail.prec_type === 'snow'"><i class="bi bi-cloud-snow mx-3 fs-1"></i></span>
+        </div>
+        <div class="col text-color text-center" *ngIf="detail.cloudcover > 3 && detail.cloudcover <= 7">
+            <i class="bi bi-cloud-sun fs-1 text-color-y"></i>
+            <span *ngIf="detail.prec_type === 'rain'"><i class="bi bi-cloud-drizzle mx-3 fs-1 text-secondary"></i></span>
+            <span *ngIf="detail.prec_type === 'snow'"><i class="bi bi-cloud-snow mx-3 fs-1"></i></span>
+        </div>
+        <div class="col text-color text-center" *ngIf="detail.cloudcover > 7 && detail.cloudcover <= 9">
+            <i class="bi bi-clouds fs-1 text-secondary"></i>
+            <span *ngIf="detail.prec_type === 'rain'"><i class="bi bi-cloud-drizzle mx-3 fs-1 text-secondary"></i></span>
+            <span *ngIf="detail.prec_type === 'snow'"><i class="bi bi-cloud-snow mx-3 fs-1"></i></span>
+        </div>
     </div>
+
 </div>
