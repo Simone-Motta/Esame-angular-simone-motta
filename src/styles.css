@@ -27,7 +27,7 @@ p {
     color: var(--clr-textSecondary);
 }
 
-.navbar {
+.navbar, footer {
     background-color: var(--clr-secondary);
 }
 
@@ -58,3 +58,15 @@ p {
 i {
     height: 100px;
 }
+
+.container-err {
+    height: 90vh;
+}
+
+/* md */
+@media (min-width: 768px) { 
+    .custom-border {
+        border-left: 10px white;
+    }
+}
+

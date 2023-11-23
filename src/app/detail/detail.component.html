@@ -1,10 +1,11 @@
+<ng-container *ngIf="flagValidValues">
 <div class="container-fluid mt-4" *ngIf="sunsetDetails">
-    <div class="d-md-flex">
+    <div class="d-md-flex align-items-center">
         <h2 class="m-0">Ecco i dati meteo per la località:</h2>      
-        <h2 class="m-0 ms-md-3 text-warning">{{ sunsetDetails.timezone }}</h2>      
+        <!-- <h2 class="m-0 ms-md-3 text-warning">{{ sunsetDetails.timezone }}</h2>       -->
+    <h3 class="text-color-y ms-sm-0 ms-md-3 mt-2">Lat: {{ latitudine }}</h3> 
+    <h3 class="text-color-y ms-sm-0 ms-md-3 mt-2">Long: {{ longitudine }}</h3>
     </div>
-    <h3 class="text-color-y m-0">Lat: {{ latitudine }}</h3> 
-    <h3 class="text-color-y m-0">Long: {{ longitudine }}</h3>
 </div>
 
 <section>
@@ -77,3 +78,21 @@
     </div>
 
 </div>
+</ng-container>
+
+<ng-container *ngIf="flagValidValues === false">
+    <div class="container container-err">
+        <div class="row my-4">
+            <h2 class="text-warning">Attenzione! Hai inserito un valore non consentito come parametro di ricerca</h2>
+            <p class="fs-2">I parametri accettati sono:</p>
+            <ul class="text-color fs-5">
+                <li>Latitudine: valori compresi tra -90 e 90</li>
+                <li>Longitudine: valori compresi tra -180 e 180</li>
+                <li>Non puoi passare stringhe, solo numeri!</li>
+            </ul>
+        </div>
+        <div>
+            <button class="btn btn-warning rounded-pill" routerLink="/home" (click)="navigateToForm()">Riprova!</button>
+        </div>
+    </div>
+</ng-container>

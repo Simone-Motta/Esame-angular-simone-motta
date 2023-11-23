@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MeteoService } from '../_services/meteo.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SunsetResults } from '../model/sunset.model';
 import { WeatherForecastResult } from '../model/forecast.model';
 
@@ -18,8 +18,9 @@ export class DetailComponent implements OnInit {
     longitudine: number = 0;
 
     flagConvertFormat: boolean = true;
+    flagValidValues: boolean = true;
 
-    constructor (private meteoService: MeteoService, private route: ActivatedRoute) {}
+    constructor (private meteoService: MeteoService, private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit(): void {
 
@@ -29,11 +30,23 @@ export class DetailComponent implements OnInit {
             this.longitudine = parseFloat(params.get("long")!)
             console.log(this.latitudine, this.longitudine)
 
-            this.printDetailSunset(this.latitudine, this.longitudine)
-            this.printDetailWeatherForecast(this.latitudine, this.longitudine)
+            if(this.validValueLat(this.latitudine) && this.validValueLong(this.longitudine)) {
+                this.printDetailSunset(this.latitudine, this.longitudine)
+                this.printDetailWeatherForecast(this.latitudine, this.longitudine)
+            } else {
+                this.flagValidValues = false;
+            }
   
         })
 
+    }
+
+    validValueLat(latitudine: number): boolean {
+        return !isNaN(latitudine) && latitudine >= -90 && latitudine <= 90
+    }
+
+    validValueLong(longitudine: number): boolean {
+        return !isNaN(longitudine) && longitudine >= -180 && longitudine <= 180
     }
 
     printDetailSunset(latitudine: number, longitudine: number) {
@@ -74,6 +87,11 @@ export class DetailComponent implements OnInit {
       
         //return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`; // Restituisce l'orario nel formato a 24 ore
         return "" + formattedHours + ":" + formattedMinutes + ":" + formattedSeconds
+      }
+
+      navigateToForm () {
+        // Navigate to /results#top
+        this.router.navigate(['/home'], { fragment: 'form' });
       }
 
 }
